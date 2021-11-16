@@ -1,0 +1,48 @@
+Star_Trek_PADD.jpg (361×276)
+https://upload.wikimedia.org/wikipedia/en/8/88/Star_Trek_PADD.jpg
+
+Skia Graphics Engine - Wikipedia
+https://en.wikipedia.org/wiki/Skia_Graphics_Engine
+
+About Skia | Skia
+https://skia.org/about/
+
+Skottie - Lottie Animation Player | Skia
+https://skia.org/docs/user/modules/skottie/
+
+viniciusfbb/skia4delphi: Skia4Delphi is a cross-platform 2D graphics API for Delphi platforms based on Google's Skia Graphics Library. It provides a comprehensive 2D API that can be used across mobile, server and desktop models to render images.
+https://github.com/viniciusfbb/skia4delphi
+
+skia4delphi/LOTTIE.md at main · viniciusfbb/skia4delphi
+https://github.com/viniciusfbb/skia4delphi/blob/main/Documents/LOTTIE.md
+
+Star Trek fonts | Memory Alpha | Fandom
+https://memory-alpha.fandom.com/wiki/Star_Trek_fonts
+
+https://upload.wikimedia.org/wikipedia/commons/9/9a/Emblem.svg
+https://upload.wikimedia.org/wikipedia/commons/9/9a/Emblem.svg
+
+lcars - Google Search
+https://www.google.com/search?q=lcars
+
+Star_Trek_PADD.jpg (361×276)
+https://upload.wikimedia.org/wikipedia/en/8/88/Star_Trek_PADD.jpg
+
+TrekCore.com
+https://www.trekcore.com/audio/
+
+Free Lottie Animation Files, Tools & Plugins - LottieFiles
+https://lottiefiles.com/
+
+checkdigits/spacecomputer: A 'starship computer console from the future' - example of using Skia4Delphi
+https://github.com/checkdigits/spacecomputer
+
+Move Your UI to the 23rd Century - Building a Data Dashboard with Delphi and Skia. Engage! - DelphiCon 2021 by Embarcadero
+https://delphicon.embarcadero.com/talks/move-your-ui-to-the-23rd-century-building-a-data-dashboard-with-delphi-and-skia-engage/
+
+Evertype: Klingon pIqaD fonts
+https://www.evertype.com/fonts/tlh/
+
+ConScript Unicode Registry
+https://www.evertype.com/standards/csur/klingon.html
+
