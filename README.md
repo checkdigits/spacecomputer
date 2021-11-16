@@ -5,6 +5,8 @@ Original code: **Ian Barker**
 [https://github.com/checkdigits](https://github.com/checkdigits)
 
 [https://about.me/IanBarker](https://about.me/IanBarker)
+
+![Engage](https://github.com/checkdigits/spacecomputer/blob/main/graphics/delphi_con_barker_demo.gif)
 			   
 __Needs__ Skia4Delphi installed [https://github.com/viniciusfbb/skia4delphi](https://github.com/viniciusfbb/skia4delphi)
 
