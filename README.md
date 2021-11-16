@@ -2,8 +2,9 @@
 
 Original code: **Ian Barker** 
 
-               [https://github.com/checkdigits](https://github.com/checkdigits)
-			   [https://about.me/IanBarker](https://about.me/IanBarker)
+[https://github.com/checkdigits](https://github.com/checkdigits)
+
+[https://about.me/IanBarker](https://about.me/IanBarker)
 			   
 __Needs__ Skia4Delphi installed [https://github.com/viniciusfbb/skia4delphi](https://github.com/viniciusfbb/skia4delphi)
 
