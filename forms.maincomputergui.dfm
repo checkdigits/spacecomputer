@@ -765,10 +765,6 @@ object MainComputerGUI: TMainComputerGUI
     Top = 711
     Width = 253
     Height = 30
-    AutoOpen = True
-    FileName = 
-      'C:\vms_share\delphicon_2021\ianbarker\spacecomputer\sounds\engag' +
-      'e.mp3'
     Visible = False
     TabOrder = 0
   end
