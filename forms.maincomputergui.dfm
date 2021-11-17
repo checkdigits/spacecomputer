@@ -678,7 +678,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'MAIN ROSTER'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
@@ -692,7 +692,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'AFT DECK C'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
@@ -706,7 +706,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'MAIN BULKHEAD'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
@@ -720,7 +720,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'FORWARD DECK'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
@@ -734,7 +734,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'DILITHIUM'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
@@ -748,7 +748,7 @@ object MainComputerGUI: TMainComputerGUI
     Alignment = taRightJustify
     Caption = 'ALERTS ON'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
+    Font.Color = 5723991
     Font.Height = -11
     Font.Name = 'Roboto Cn'
     Font.Style = []
