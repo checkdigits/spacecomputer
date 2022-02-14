@@ -42,13 +42,13 @@ type Beeps = (BeepRedAlert, BeepBlaaaa, BeepBeeBop, BeepIncoming, BeepComputerWo
 
 type
   TMainComputerGUI = class(TForm)
-    PlanetAnim: TSkLottieAnimation;
-    CountdownAnim: TSkLottieAnimation;
-    WireframeGlobeAnim: TSkLottieAnimation;
-    WarpVectorAnim: TSkLottieAnimation;
-    RadarSweepAnim: TSkLottieAnimation;
-    HeartbeatAnim: TSkLottieAnimation;
-    ScanningAnim: TSkLottieAnimation;
+    PlanetAnim: TSkAnimatedImage;
+    CountdownAnim: TSkAnimatedImage;
+    WireframeGlobeAnim: TSkAnimatedImage;
+    WarpVectorAnim: TSkAnimatedImage;
+    RadarSweepAnim: TSkAnimatedImage;
+    HeartbeatAnim: TSkAnimatedImage;
+    ScanningAnim: TSkAnimatedImage;
     FederationLogo: TSkSvg;
     Shape1: TShape;
     Shape2: TShape;

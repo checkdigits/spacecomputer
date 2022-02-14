@@ -14,4 +14,8 @@ Project originally written with [Delphi 11.](https://www.embarcadero.com/product
 
 To accompany Ian's session at DelphiCon 2021 - [https://delphicon.embarcadero.com](https://delphicon.embarcadero.com)
 
+Updated to work with version 3.0 and above.
+Note that this is a VCK project and therefore the animations can't be transparent which was a change in v3 of Skia4Delphi.
+I will upload a Firemonkey FMX version of the same project shortly.
+
 
