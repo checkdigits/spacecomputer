@@ -16,7 +16,6 @@ object MainComputerGUI: TMainComputerGUI
   Position = poScreenCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
-  PixelsPerInch = 96
   DesignSize = (
     1024
     768)

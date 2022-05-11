@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Skia.Vcl, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.MPlayer;
+  Vcl.MPlayer, Skia;
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,7 +104,7 @@ var
   MainComputerGUI: TMainComputerGUI;
 
 implementation
-uses Skia,
+uses // Skia,
      System.Types,
      System.UITypes,
      System.Math;
