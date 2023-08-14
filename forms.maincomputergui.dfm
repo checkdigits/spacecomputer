@@ -15,6 +15,7 @@ object MainComputerGUI: TMainComputerGUI
   Font.Style = []
   Position = poScreenCenter
   OnActivate = FormActivate
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   DesignSize = (
     1024
@@ -25,6 +26,7 @@ object MainComputerGUI: TMainComputerGUI
     Top = 21
     Width = 122
     Height = 98
+    OnMouseUp = FederationLogoMouseUp
     Svg.OverrideColor = claTomato
     Svg.Source = 
       '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'#13#10'<svg'#13#10'  ' +
@@ -228,6 +230,7 @@ object MainComputerGUI: TMainComputerGUI
     Height = 119
     Brush.Color = 14002943
     Pen.Style = psClear
+    OnMouseUp = Shape19MouseUp
   end
   object Shape20: TShape
     Left = 0
@@ -286,6 +289,7 @@ object MainComputerGUI: TMainComputerGUI
     Height = 53
     Brush.Color = 3513087
     Pen.Style = psClear
+    OnMouseUp = Shape25MouseUp
   end
   object Label1: TLabel
     Left = 54
@@ -3930,6 +3934,14 @@ object MainComputerGUI: TMainComputerGUI
     Height = 30
     Visible = False
     TabOrder = 0
+  end
+  object MediaPlayer2: TMediaPlayer
+    Left = 747
+    Top = 647
+    Width = 253
+    Height = 30
+    Visible = False
+    TabOrder = 8
   end
   object Timer1: TTimer
     Enabled = False

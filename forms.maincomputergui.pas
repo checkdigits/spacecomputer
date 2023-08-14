@@ -1,11 +1,39 @@
 unit forms.maincomputergui;
 
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// The following compiler define controls whether or not this demo uses AWS
+// Polly to generate text to speech using AI
+//
+// If you do NOT have an AWS account then disable the define like so: {.$DEFINE USESPEECH}
+// If you DO have an AWS account then ENABLE the define like so: {$DEFINE USESPEECH}
+//
+// If you DO have an AWS account set up then you will need to install the AWS
+// components from Appercept which can be found here: https://getitnow.embarcadero.com/?q=Appercept
+// or here https://www.appercept.com/appercept-aws-sdk-for-delphi
+//
+// ** AND ** you also need to have a file in your user folder like so:
+//
+//     C:\Users\**YOUR USER NAME**\.aws\credentials
+//
+// The file needs to contain the following entries:
+//
+// [default]
+// aws_access_key_id=** YOUR AWS ACCESS KEY NAME **
+// aws_secret_access_key=** YOUR AWS API/SDK SECRET **
+//
+//
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{.$DEFINE USESPEECH}
+
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Skia.Vcl, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.MPlayer, Skia;
+  Vcl.MPlayer, Skia
+  {$IFDEF USESPEECH}, AWS.Polly{$ENDIF}
+  ;
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -84,32 +112,63 @@ type
     Image1: TImage;
     Timer1: TTimer;
     MediaPlayer1: TMediaPlayer;
+    MediaPlayer2: TMediaPlayer;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure Shape19MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FederationLogoMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure Shape25MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
-    var
-      HasNotPlayedRedAlert, PlaySounds: Boolean;
+    HasNotPlayedRedAlert, PlaySounds: Boolean;
+    {$IFDEF USESPEECH}
+    SpeechClient:   IPollyClient;
+    SpeechCount:    integer;
+    Speaking:       boolean;
+    UseFemaleVoice: boolean;
+    {$ENDIF}
     procedure WMNCHitTest(var Msg: TWMNCHitTest) ; message WM_NCHitTest;
     procedure DoSpaceText;
     function RandomLineOfNumbers: string;
     function RandomLineOfText: string;
     function RandomKlingonString(const DesiredLength: integer): string;
     procedure PlaySound(const WhichSound: Beeps);
+    {$IFDEF USESPEECH}
+    procedure Speak(const TheText: string);
+    procedure CleanupSpeechFiles;
+    {$ENDIF}
   end;
 
 var
   MainComputerGUI: TMainComputerGUI;
 
 implementation
-uses // Skia,
-     System.Types,
-     System.UITypes,
-     System.Math;
+uses
+  System.Types,
+  System.UITypes,
+  {$IFDEF USESPEECH}System.IOUtils,{$ENDIF}
+  System.Math;
 
 {$R *.dfm}
+
+{$IFDEF USESPEECH}
+ const ComputerSpeech: array[0..4] of string = (
+   'All shipwide systems are operating within normal parameters.',
+   'The starboard niscelles require plasma venting',
+   'Ensign McKeeth is not currently on board the ship',
+   'There is an incoming message from a planet situated three light years from our current location.',
+   'Captain, the ships doctor is attempting to bypass the security lock outs'
+   );
+
+ const cSpeechFileTemplate ='PollySpeak%s.mp3';
+{$ENDIF}
+
+procedure TMainComputerGUI.FederationLogoMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  Close;
+end;
 
 procedure TMainComputerGUI.FormActivate(Sender: TObject);
 begin
@@ -122,10 +181,21 @@ begin
   end;
 end;
 
+procedure TMainComputerGUI.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  {$IFDEF USESPEECH}CleanupSpeechFiles;{$ENDIF}
+end;
+
 procedure TMainComputerGUI.FormCreate(Sender: TObject);
 begin
   HasNotPlayedRedAlert := True;
   PlaySounds           := True;
+  {$IFDEF USESPEECH}
+  SpeechClient   := TPollyClient.Create;
+  SpeechCount    := 0;
+  Speaking       := False;
+  UseFemaleVoice := True;
+  {$ENDIF}
 end;
 
 procedure TMainComputerGUI.PlaySound(const WhichSound: Beeps);
@@ -211,11 +281,21 @@ begin
         Result := Concat(Result, Chr(65 + Random(25)));
 end;
 
+procedure TMainComputerGUI.Shape19MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  {$IFDEF USESPEECH}Speak(ComputerSpeech[Random(High(ComputerSpeech))]);{$ENDIF}
+end;
+
 procedure TMainComputerGUI.Shape1MouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
 begin
   // Clicking on the bottom left LCARS area toggles the sound off or on
   PlaySounds := Not PlaySounds;
   if PlaySounds then AlertLabel.Caption := 'ALERTS ON' else AlertLabel.Caption := 'ALERTS OFF';
+end;
+
+procedure TMainComputerGUI.Shape25MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  {$IFDEF USESPEECH}UseFemaleVoice := not UseFemaleVoice;{$ENDIF}
 end;
 
 procedure TMainComputerGUI.Timer1Timer(Sender: TObject);
@@ -238,6 +318,14 @@ begin
     if Pt.Y < (Shape22.Height + Shape22.Top) then Msg.Result := htCaption;
   end;
 end;
+
+{$IFDEF USESPEECH}
+procedure TMainComputerGUI.CleanupSpeechFiles;
+begin
+  for var AFile in TDirectory.GetFiles(ExtractFilePath(ParamStr(0)), Format(cSpeechFileTemplate, ['*'])) do
+    DeleteFile(AFile);
+end;
+{$ENDIF}
 
 procedure TMainComputerGUI.DoSpaceText;
 var
@@ -310,6 +398,13 @@ begin
             CaptainsOrders2 := 'REPORT TO THE BRIDGE';
             LPaint.Color   := TAlphaColors.Cadetblue; // Starfleet Cadet Blue ;)
             if Random(3) Mod 3 = 0 then PlaySound(Beeps(RandomRange(Ord(BeepIncoming), Ord(BeepEngage))));
+            {$IFDEF USESPEECH}
+            if (Random(4) Mod 4 = 0) and (SpeechCount < 20) then
+            begin
+              Inc(SpeechCount);  // Used to prevent you accidentally using all your free AWS allowance
+              Speak(ComputerSpeech[Random(High(ComputerSpeech))]);
+            end;
+            {$ENDIF}
           end;
 
         ACanvas.DrawSimpleText(Format(CaptainsOrders1, [Random(100), Random(100)]), 500, 145, LFont, LPaint);
@@ -322,5 +417,45 @@ begin
     LBitmap.Free;
   end;
 end;
+
+{$IFDEF USESPEECH}
+procedure TMainComputerGUI.Speak(const TheText: string);
+var
+  LRequest: IPollySynthesizeSpeechRequest;
+  LResponse: IPollySynthesizeSpeechResponse;
+  LAudioFile: TFileStream;
+  LFileName: string;
+begin
+  LRequest              := TPollySynthesizeSpeechRequest.Create;
+  LRequest.Engine       := 'neural'; // can also be --> LRequest.Engine := 'standard'
+  LRequest.LanguageCode := 'en-US';
+  LRequest.OutputFormat := 'mp3';
+  LRequest.Text         := TheText;
+  if UseFemaleVoice then
+    LRequest.VoiceId      := 'Joanna'
+  else
+    LRequest.VoiceId      := 'Joey';
+  LResponse             := SpeechClient.SynthesizeSpeech(LRequest);
+  if LResponse.IsSuccessful then
+    begin
+      LFileName  := ExtractFilePath(ParamStr(0)) + Format(cSpeechFileTemplate, [FormatDateTime('yyyymmddhhnnsszzz', Now)]);
+      LAudioFile := TFileStream.Create(LFileName, fmCreate);
+      try
+        LAudioFile.CopyFrom(LResponse.AudioStream);
+      finally
+        LAudioFile.Free;
+      end;
+      MediaPlayer2.Close;
+      MediaPlayer2.FileName := LFileName;
+      MediaPlayer2.Open;
+      MediaPlayer2.Play;
+    end
+  else
+    if LResponse.StatusText.ToLower.Contains('forbidden') then
+      ShowMessage('AWS access was denied. Have you set up your AWS account? [' + LResponse.StatusText + ']')
+    else
+      ShowMessage('AWS error: ' + LResponse.StatusText);
+end;
+{$ENDIF}
 
 end.
