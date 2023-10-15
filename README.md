@@ -16,6 +16,5 @@ To accompany Ian's session at DelphiCon 2021 - [https://delphicon.embarcadero.co
 
 Updated to work with version 3.0 and above.
 Note that this is a VCL project and therefore the animations can't be transparent which was a change in v3 of Skia4Delphi.
-I will upload a Firemonkey FMX version of the same project shortly.
 
 
